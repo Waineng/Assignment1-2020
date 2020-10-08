@@ -7,7 +7,9 @@ import java.util.HashMap;
 /**
  * A support class to complete main calculation of ShootingStreak
  */
+
 public class ShootingStreakCouter {
+
     /**
      *
      * @param fileFolder name of fileFolder
@@ -17,26 +19,36 @@ public class ShootingStreakCouter {
      * @return result of type HashMap
      * @throws IOException
      */
+
     public static HashMap<String, int[]> count(String fileFolder, String gameNumStr,
             String shotTypeStr, String[] players) throws IOException{
         File folder = new File(fileFolder);
+
         int count = 0;
+
         // initialize result map
+
         HashMap<String, int[]> map = new HashMap<>();
         for (String player : players) {
             map.put(player, new int[]{0, 0});
         }
-        // read all files in fileFolder
+
+        // read all files in fileFolder ,
+
         for (File file : folder.listFiles()) {
             int gameNum = gameNumStr.equals("all") ? folder.list().length : Integer.parseInt(gameNumStr);
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = null;
             String curName = null, curShotIn = null, curShotType = null;
             int curCount = 0;
+
             // read each line into memory in file
+
             while ((line = br.readLine()) != null) {
                 String[] datas = line.split(",");
+
                 // read first line of first file
+
                 if (curName == null) {
                     curName = datas[0];
                     curShotIn = datas[2];
@@ -44,7 +56,9 @@ public class ShootingStreakCouter {
                     curCount = 1;
                     continue;
                 }
+
                 // data not interested in
+
                 if (!shotTypeStr.equals("any") && !shotTypeStr.equals(datas[3]))
                     continue;
                 if ((shotTypeStr.equals("any") && (!curName.equals(datas[0]) || !curShotIn.equals(datas[2])))
@@ -73,14 +87,19 @@ public class ShootingStreakCouter {
      * @param curCount current count in statistics
      * @param map result map
      */
+
     public static void updateMap(String curShotIn, String curName, int curCount, HashMap<String, int[]> map) {
-        // make
+
+        // make method
+
         if (curShotIn.equals("make")) {
             if (map.get(curName) != null) {
                 map.get(curName)[1] = Math.max(map.get(curName)[1], curCount);
             }
         }
-        // miss
+
+        // miss method
+
         else if (curShotIn.equals("miss")) {
             if (map.get(curName) != null) {
                 map.get(curName)[0] = Math.max(map.get(curName)[0], curCount);

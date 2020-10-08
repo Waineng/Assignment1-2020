@@ -13,7 +13,9 @@ import static org.junit.Assert.assertTrue;
  * The grader will test your code with additional tests
  *
  */
+
 public class SampleTest {
+
     //the below code is adapted from the following reference
     //testing system.out using junit:
     //https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
@@ -56,5 +58,6 @@ public class SampleTest {
         ShootingStreak.main(args);
         String allOutput = outData.toString();
         assertTrue(allOutput.contains("KLeonard 0 0"));
+
     }
 }

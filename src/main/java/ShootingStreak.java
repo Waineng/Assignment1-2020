@@ -38,6 +38,7 @@ public class ShootingStreak {
      *             forth (and beyond): the player names separated by spaces, example: K.Lowry
      *                                 you may assume no player names contain spaces
      */
+
     public static void main(String [] args){
         if(args.length < 4) {
             System.out.println("Please provide at least 4 program arguments:\n" +
@@ -48,21 +49,27 @@ public class ShootingStreak {
             }
             System.out.println();
         }
+
         // get parameters from input
+
         String fileFolder = args[0];
         String gameNumStr = args[1];
         String shotTypeStr = args[2];
         String[] players = Arrays.copyOfRange(args, 3, args.length);
+
         // initialize result
+
         HashMap<String, int[]> map = null;
         try {
+
             // call method to calculate
+
             map = ShootingStreakCouter.count(fileFolder, gameNumStr, shotTypeStr, players);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // print all arguments in command line
+        // print all arguments in command line.
 
         for (String arg : args) {
             System.out.println(String.join(" ", args));
@@ -70,7 +77,8 @@ public class ShootingStreak {
 
         System.out.println("Player Longest_Misses Longest_Makes");
 
-        // print result of each player
+        // print result of each player and get value
+
         for (String player : players) {
             System.out.println(player + " " + map.get(player)[0] + " " + map.get(player)[1]);
 
